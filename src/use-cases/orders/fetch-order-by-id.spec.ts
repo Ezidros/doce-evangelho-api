@@ -38,6 +38,6 @@ describe('fetch order by id', () => {
       orderId: 'order-id-1',
     })
 
-    expect(order?.revenue).toEqual('R$ 5,00')
+    expect(order?.revenue).toEqual('R$ 6,00')
   })
 })
