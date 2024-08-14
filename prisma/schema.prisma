@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Cake {
+  id              String   @id @default(uuid())
+  flavor          String
+  filling         String
+  description     String
+  price           String
+  isSpecialFlavor Boolean? @default(false) @map("is_special_flavor")
+  isSolded        Boolean? @default(false) @map("is_solded")
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+  orders          Order[]
+
+  @@map("cakes")
+}
+
+model Order {
+  id         String @id @default(uuid())
+  clientName String @map("client_name")
+  amount     String
+  benefit    String
+  revenue    String
+
+  cake   Cake   @relation(fields: [cakeId], references: [id])
+  cakeId String @map("cake_id")
+
+  @@map("orders")
+}
