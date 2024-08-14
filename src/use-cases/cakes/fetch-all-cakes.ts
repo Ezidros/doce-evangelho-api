@@ -1,5 +1,5 @@
 import { Cake } from '@prisma/client'
-import { CakesRepository } from '../repositories/cakes-repository'
+import { CakesRepository } from '../../repositories/cakes-repository'
 
 interface FetchAllCakesUseCaseResponse {
   cakes: Cake[]

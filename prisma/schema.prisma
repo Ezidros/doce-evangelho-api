@@ -23,11 +23,13 @@ model Cake {
 }
 
 model Order {
-  id         String @id @default(uuid())
-  clientName String @map("client_name")
+  id         String   @id @default(uuid())
+  clientName String   @map("client_name")
   amount     String
   benefit    String
   revenue    String
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
 
   cake   Cake   @relation(fields: [cakeId], references: [id])
   cakeId String @map("cake_id")

@@ -1,24 +1,28 @@
 import { beforeEach, describe, expect, it } from 'vitest'
-import { InMemoryCakesRepository } from '../repositories/in-memory/in-memory-cakes-repository'
-import { CreateCakeUseCase } from './create-cake'
+import { InMemoryCakesRepository } from '../../repositories/in-memory/in-memory-cakes-repository'
+import { DeleteCakeUseCase } from './delete-cake'
 
 let cakesRepository: InMemoryCakesRepository
-let sut: CreateCakeUseCase
+let sut: DeleteCakeUseCase
 
 describe('create cakes', () => {
   beforeEach(() => {
     cakesRepository = new InMemoryCakesRepository()
-    sut = new CreateCakeUseCase(cakesRepository)
+    sut = new DeleteCakeUseCase(cakesRepository)
   })
 
   it('should be able to create a new cake', async () => {
-    const { cake } = await sut.execute({
+    const createCake = await cakesRepository.create({
       flavor: 'Chocolate',
       filling: 'Brigadeiro',
       description: 'Um delicioso bolo com recheio de brigadeiro',
       price: 'R$ 8,00',
     })
 
-    expect(cake.id).toEqual(expect.any(String))
+    await sut.execute({
+      cakeId: createCake.id,
+    })
+
+    expect(cakesRepository.items).toHaveLength(0)
   })
 })
