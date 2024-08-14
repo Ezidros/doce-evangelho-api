@@ -1,4 +1,4 @@
-import { CakesRepository } from '../repositories/cakes-repository'
+import { CakesRepository } from '../../repositories/cakes-repository'
 
 interface DeleteCakeUseCaseRequest {
   cakeId: string

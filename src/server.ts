@@ -8,6 +8,16 @@ import {
   validatorCompiler,
   ZodTypeProvider,
 } from 'fastify-type-provider-zod'
+import { createCakeController } from './controllers/cakes/create.controller'
+import { updateCakeController } from './controllers/cakes/update.controller'
+import { deleteCakeController } from './controllers/cakes/delete.controller'
+import { fetchAllCakeController } from './controllers/cakes/get-all.controller'
+import { getCakeByIdController } from './controllers/cakes/get-by-id.controller'
+import { createOrderController } from './controllers/orders/create.controller'
+import { updateOrderController } from './controllers/orders/update.controller'
+import { deleteOrderController } from './controllers/orders/delete.controller'
+import { getAllOrdersController } from './controllers/orders/get-all.controller'
+import { getOrderByIdController } from './controllers/orders/get-by-id.controller'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -32,6 +42,20 @@ app.register(fastifySwagger, {
 app.register(fastifySwaggerUi, {
   routePrefix: '/docs',
 })
+
+// Cakes
+app.register(createCakeController)
+app.register(updateCakeController)
+app.register(deleteCakeController)
+app.register(fetchAllCakeController)
+app.register(getCakeByIdController)
+
+// Orders
+app.register(createOrderController)
+app.register(updateOrderController)
+app.register(deleteOrderController)
+app.register(getAllOrdersController)
+app.register(getOrderByIdController)
 
 app
   .listen({

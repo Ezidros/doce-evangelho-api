@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest'
-import { InMemoryCakesRepository } from '../repositories/in-memory/in-memory-cakes-repository'
+import { InMemoryCakesRepository } from '../../repositories/in-memory/in-memory-cakes-repository'
 import { FetchAllCakesUseCase } from './fetch-all-cakes'
 
 let cakesRepository: InMemoryCakesRepository
