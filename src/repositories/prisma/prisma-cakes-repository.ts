@@ -19,6 +19,26 @@ export class PrismaCakeRepository implements CakesRepository {
     return cake
   }
 
+  async countCakes(cakeId: string): Promise<number> {
+    const cake = await prisma.cake.count({
+      where: {
+        id: cakeId,
+      },
+    })
+
+    return cake
+  }
+
+  async addCakeById(cakeId: string): Promise<number> {
+    const cake = await prisma.cake.count({
+      where: {
+        id: cakeId,
+      },
+    })
+
+    return cake + 1
+  }
+
   async create(data: Prisma.CakeCreateInput): Promise<Cake> {
     const cake = await prisma.cake.create({
       data,
