@@ -20,6 +20,16 @@ export class InMemoryCakesRepository implements CakesRepository {
     return cake
   }
 
+  async countCakes(cakeId: string): Promise<number> {
+    return this.items.filter((cake) => cake.id === cakeId).length
+  }
+
+  async addCakeById(cakeId: string): Promise<number> {
+    const cakes = this.items.filter((cake) => cake.id === cakeId).length
+
+    return cakes + 1
+  }
+
   async create(data: Prisma.CakeCreateInput): Promise<Cake> {
     const cake = {
       id: data.id ?? 'cake-id',

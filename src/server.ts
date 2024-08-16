@@ -18,6 +18,8 @@ import { updateOrderController } from './controllers/orders/update.controller'
 import { deleteOrderController } from './controllers/orders/delete.controller'
 import { getAllOrdersController } from './controllers/orders/get-all.controller'
 import { getOrderByIdController } from './controllers/orders/get-by-id.controller'
+import { countCakesController } from './controllers/cakes/count-cakes.controller'
+import { addCakesController } from './controllers/cakes/add-cakes.controller'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -49,6 +51,8 @@ app.register(updateCakeController)
 app.register(deleteCakeController)
 app.register(fetchAllCakeController)
 app.register(getCakeByIdController)
+app.register(countCakesController)
+app.register(addCakesController)
 
 // Orders
 app.register(createOrderController)
