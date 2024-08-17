@@ -13,6 +13,7 @@ model Cake {
   filling         String
   description     String
   price           String
+  quantity        Int?     @default(1)
   isSpecialFlavor Boolean? @default(false) @map("is_special_flavor")
   isSolded        Boolean? @default(false) @map("is_solded")
   createdAt       DateTime @default(now()) @map("created_at")
@@ -23,13 +24,12 @@ model Cake {
 }
 
 model Order {
-  id         String   @id @default(uuid())
-  clientName String   @map("client_name")
-  amount     String
-  benefit    String
-  revenue    String
-  createdAt  DateTime @default(now()) @map("created_at")
-  updatedAt  DateTime @updatedAt @map("updated_at")
+  id        String   @id @default(uuid())
+  amount    String
+  benefit   String
+  revenue   String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
   cake   Cake   @relation(fields: [cakeId], references: [id])
   cakeId String @map("cake_id")

@@ -26,7 +26,6 @@ describe('update order', () => {
 
     const createdOrder = await ordersRepository.create({
       id: 'order-id-1',
-      clientName: 'John doe',
       benefit: 'R$ 3,00',
       revenue: 'R$ 5,00',
       amount: cake.price,
@@ -35,11 +34,10 @@ describe('update order', () => {
 
     const { order } = await sut.execute({
       orderId: createdOrder.id,
-      benefit: createdOrder.benefit,
+      benefit: 'R$ 6,00',
       revenue: createdOrder.revenue,
-      clientName: 'James doe',
     })
 
-    expect(order.clientName).toEqual('James doe')
+    expect(order.benefit).toEqual('R$ 6,00')
   })
 })

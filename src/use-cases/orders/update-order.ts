@@ -3,7 +3,6 @@ import { OrdersRepository } from '../../repositories/orders-repository'
 
 interface UpdateOrderUseCaseRequest {
   orderId: string
-  clientName: string
   benefit: string
   revenue: string
 }
@@ -16,7 +15,6 @@ export class UpdateOrderUseCase {
   constructor(public orderRepository: OrdersRepository) {}
 
   async execute({
-    clientName,
     benefit,
     orderId,
     revenue,
@@ -27,7 +25,6 @@ export class UpdateOrderUseCase {
       throw new Error()
     }
 
-    order.clientName = clientName
     order.benefit = benefit
     order.revenue = revenue
 

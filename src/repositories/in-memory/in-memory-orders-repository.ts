@@ -1,8 +1,11 @@
-import { Order, Prisma } from '@prisma/client'
+import { Cake, Order, Prisma } from '@prisma/client'
 import { OrdersRepository } from '../orders-repository'
+import { InMemoryCakesRepository } from './in-memory-cakes-repository'
 
 export class InMemoryOrdersRepository implements OrdersRepository {
   public items: Order[] = []
+
+  constructor(private cakesRepository: InMemoryCakesRepository) {}
 
   async fetchAllOrders(): Promise<Order[]> {
     const orders = this.items
@@ -20,10 +23,50 @@ export class InMemoryOrdersRepository implements OrdersRepository {
     return order
   }
 
+  async markCakeAsSold(
+    cake: Cake,
+    data: Prisma.OrderUncheckedCreateInput,
+  ): Promise<Order> {
+    const currentCake = await this.cakesRepository.fetchById(cake.id)
+
+    if (!currentCake) {
+      throw new Error()
+    }
+
+    const soldCake = await this.cakesRepository.update({
+      isSolded: true,
+      id: currentCake?.id,
+      description: currentCake?.description,
+      flavor: currentCake?.flavor,
+      filling: currentCake?.filling,
+      isSpecialFlavor: currentCake?.isSpecialFlavor,
+      price: currentCake?.price,
+      quantity: currentCake?.quantity,
+      createdAt: currentCake?.createdAt,
+      updatedAt: currentCake?.updatedAt,
+    })
+
+    const revenue = Number(soldCake.price) * 0.4
+    const benefit = Number(soldCake.price) * 0.6
+
+    const order = {
+      id: data.id ?? 'order-id',
+      amount: soldCake.price,
+      benefit: benefit.toString(),
+      revenue: revenue.toString(),
+      cakeId: soldCake.id,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    }
+
+    this.items.push(order)
+
+    return order
+  }
+
   async create(data: Prisma.OrderUncheckedCreateInput): Promise<Order> {
     const order = {
       id: data.id ?? 'order-id',
-      clientName: data.clientName,
       amount: data.amount,
       benefit: data.benefit,
       revenue: data.revenue,

@@ -25,7 +25,6 @@ describe('fetch all orders', () => {
     })
 
     await ordersRepository.create({
-      clientName: 'John doe',
       benefit: 'R$ 3,00',
       revenue: 'R$ 5,00',
       amount: cake.price,

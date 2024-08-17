@@ -2,6 +2,7 @@ import { CakesRepository } from '../../repositories/cakes-repository'
 
 interface AddCakeUseCaseRequest {
   cakeId: string
+  quantity: number
 }
 
 interface AddCakeUseCaseResponse {
@@ -13,8 +14,19 @@ export class AddCakeUseCase {
 
   async execute({
     cakeId,
+    quantity,
   }: AddCakeUseCaseRequest): Promise<AddCakeUseCaseResponse> {
-    const count = await this.cakeRepository.addCakeById(cakeId)
+    const cake = await this.cakeRepository.fetchById(cakeId)
+
+    if (!cake) {
+      throw new Error()
+    }
+
+    if (cake) {
+      cake.quantity = quantity
+    }
+
+    const count = (await this.cakeRepository.addCakeById(cake))! ?? 1
 
     return { count }
   }

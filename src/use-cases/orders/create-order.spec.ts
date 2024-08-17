@@ -25,7 +25,6 @@ describe('create order', () => {
     })
 
     const { order } = await sut.execute({
-      clientName: 'John doe',
       benefit: 'R$ 3,00',
       revenue: 'R$ 5,00',
       amount: cake.price,

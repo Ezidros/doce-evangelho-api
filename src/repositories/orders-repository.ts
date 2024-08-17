@@ -1,4 +1,4 @@
-import { Order, Prisma } from '@prisma/client'
+import { Cake, Order, Prisma } from '@prisma/client'
 
 export interface OrdersRepository {
   create(data: Prisma.OrderUncheckedCreateInput): Promise<Order>
@@ -7,4 +7,8 @@ export interface OrdersRepository {
 
   fetchAllOrders(): Promise<Order[]>
   fetchById(orderId: string): Promise<Order | null>
+  markCakeAsSold(
+    cake: Cake,
+    data: Prisma.OrderUncheckedCreateInput,
+  ): Promise<Order>
 }

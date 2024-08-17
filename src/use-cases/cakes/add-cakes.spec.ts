@@ -21,8 +21,9 @@ describe('add new cakes', () => {
 
     const { count } = await sut.execute({
       cakeId: createCake.id,
+      quantity: createCake.quantity!,
     })
 
-    expect(count).toEqual(2)
+    expect(count).toEqual(1)
   })
 })
