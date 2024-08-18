@@ -4,7 +4,7 @@ import { z } from 'zod'
 import { makeAddNewCakes } from '../../factories/make-add-new-cakes'
 
 export async function addCakesController(app: FastifyInstance) {
-  app.withTypeProvider<ZodTypeProvider>().patch(
+  app.withTypeProvider<ZodTypeProvider>().put(
     '/add/cake/:cakeId',
     {
       schema: {
@@ -24,12 +24,12 @@ export async function addCakesController(app: FastifyInstance) {
 
       const addCakes = makeAddNewCakes()
 
-      const { count } = await addCakes.execute({
+      const { cake } = await addCakes.execute({
         cakeId,
-        quantity: quantity! + 1,
+        quantity: quantity!,
       })
 
-      return { count }
+      return { cake }
     },
   )
 }

@@ -1,42 +1,34 @@
 import { beforeEach, describe, expect, it } from 'vitest'
-import { InMemoryCakesRepository } from '../../repositories/in-memory/in-memory-cakes-repository'
-import { FetchOrderByIdUseCase } from './fetch-order-by-id'
 import { InMemoryOrdersRepository } from '../../repositories/in-memory/in-memory-orders-repository'
+import { InMemoryCakesRepository } from '../../repositories/in-memory/in-memory-cakes-repository'
+import { MarkCakeAsSoldUseCase } from './mark-cake-as-sold'
 
 let cakesRepository: InMemoryCakesRepository
 
 let ordersRepository: InMemoryOrdersRepository
-let sut: FetchOrderByIdUseCase
+let sut: MarkCakeAsSoldUseCase
 
-describe('fetch order by id', () => {
+describe('mark cake as sold', () => {
   beforeEach(() => {
     cakesRepository = new InMemoryCakesRepository()
 
     ordersRepository = new InMemoryOrdersRepository(cakesRepository)
-    sut = new FetchOrderByIdUseCase(ordersRepository)
+    sut = new MarkCakeAsSoldUseCase(ordersRepository, cakesRepository)
   })
 
-  it('should be able to fetch an order by id', async () => {
+  it('should be able to create a new order', async () => {
     const cake = await cakesRepository.create({
-      id: 'cake-1',
       flavor: 'Chocolate',
       filling: 'Brigadeiro',
       description: 'Um delicioso bolo com recheio de brigadeiro',
       price: 'R$ 8,00',
     })
 
-    await ordersRepository.create({
-      id: 'order-id-1',
-      benefit: 'R$ 3,00',
-      revenue: 'R$ 5,00',
-      amount: cake.price,
+    const { order } = await sut.execute({
       cakeId: cake.id,
     })
 
-    const { order } = await sut.execute({
-      orderId: 'order-id-1',
-    })
-
-    expect(order?.revenue).toEqual('R$ 5,00')
+    expect(order.id).toEqual(expect.any(String))
+    expect(cake.isSolded).toEqual(true)
   })
 })

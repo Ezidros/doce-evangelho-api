@@ -29,11 +29,13 @@ export class PrismaOrderRepository implements OrdersRepository {
       },
       data: {
         isSolded: cake.isSolded,
+        quantity: cake.quantity! - 1,
       },
       select: {
         id: true,
         price: true,
         isSolded: true,
+        quantity: true,
       },
     })
 
@@ -43,7 +45,6 @@ export class PrismaOrderRepository implements OrdersRepository {
     const order = await prisma.order.create({
       data: {
         cakeId: currentCake.id,
-        clientName: data.clientName,
         amount: currentCake.price,
         createdAt: data.createdAt,
         updatedAt: data.updatedAt,

@@ -20,9 +20,13 @@ export async function deleteCakeController(app: FastifyInstance) {
 
       const deleteCake = makeDeleteCake()
 
-      await deleteCake.execute({
-        cakeId,
-      })
+      try {
+        await deleteCake.execute({
+          cakeId,
+        })
+      } catch (err) {
+        console.log(err)
+      }
 
       return reply.status(204).send()
     },

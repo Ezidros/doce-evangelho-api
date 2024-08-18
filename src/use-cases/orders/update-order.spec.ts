@@ -12,7 +12,7 @@ describe('update order', () => {
   beforeEach(() => {
     cakesRepository = new InMemoryCakesRepository()
 
-    ordersRepository = new InMemoryOrdersRepository()
+    ordersRepository = new InMemoryOrdersRepository(cakesRepository)
     sut = new UpdateOrderUseCase(ordersRepository)
   })
 

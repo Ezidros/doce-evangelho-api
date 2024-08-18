@@ -5,13 +5,13 @@ import { UpdateCakeUseCase } from './update-cake'
 let cakesRepository: InMemoryCakesRepository
 let sut: UpdateCakeUseCase
 
-describe('create cakes', () => {
+describe('update cakes', () => {
   beforeEach(() => {
     cakesRepository = new InMemoryCakesRepository()
     sut = new UpdateCakeUseCase(cakesRepository)
   })
 
-  it('should be able to create a new cake', async () => {
+  it('should be able to update a cake', async () => {
     const createCake = await cakesRepository.create({
       flavor: 'Chocolate',
       filling: 'Brigadeiro',
@@ -23,6 +23,7 @@ describe('create cakes', () => {
       cakeId: createCake.id,
       description: createCake.description,
       filling: createCake.filling,
+      quantity: createCake.quantity,
       price: createCake.price,
       flavor: 'Morango',
     })

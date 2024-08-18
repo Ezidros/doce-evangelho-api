@@ -12,7 +12,7 @@ describe('delete orders', () => {
   beforeEach(() => {
     cakesRepository = new InMemoryCakesRepository()
 
-    ordersRepository = new InMemoryOrdersRepository()
+    ordersRepository = new InMemoryOrdersRepository(cakesRepository)
     sut = new DeleteOrderUseCase(ordersRepository)
   })
 
@@ -25,7 +25,6 @@ describe('delete orders', () => {
     })
 
     const order = await ordersRepository.create({
-      clientName: 'John doe',
       benefit: 'R$ 3,00',
       revenue: 'R$ 5,00',
       amount: cake.price,

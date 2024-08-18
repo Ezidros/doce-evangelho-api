@@ -6,6 +6,7 @@ interface UpdateCakeUseCaseRequest {
   flavor: string
   filling: string
   description: string
+  quantity: number | null
   price: string
   isSpecialFlavor?: boolean
   isSolded?: boolean
@@ -23,6 +24,7 @@ export class UpdateCakeUseCase {
     flavor,
     filling,
     description,
+    quantity,
     price,
     isSolded,
     isSpecialFlavor,
@@ -37,6 +39,7 @@ export class UpdateCakeUseCase {
     cake.filling = filling
     cake.description = description
     cake.price = price
+    cake.quantity = quantity ?? 0
     cake.isSolded = isSolded ?? false
     cake.isSpecialFlavor = isSpecialFlavor ?? false
 

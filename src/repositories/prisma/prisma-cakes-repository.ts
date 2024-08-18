@@ -19,11 +19,8 @@ export class PrismaCakeRepository implements CakesRepository {
     return cake
   }
 
-  async addCakeById(cake: Cake): Promise<number | null> {
+  async addCakeById(cake: Cake): Promise<Cake> {
     const quanityCake = await prisma.cake.update({
-      select: {
-        quantity: true,
-      },
       where: {
         id: cake.id,
       },
@@ -32,7 +29,7 @@ export class PrismaCakeRepository implements CakesRepository {
       },
     })
 
-    return quanityCake.quantity!
+    return quanityCake
   }
 
   async create(data: Prisma.CakeCreateInput): Promise<Cake> {

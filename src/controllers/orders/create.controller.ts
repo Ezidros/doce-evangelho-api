@@ -31,7 +31,6 @@ export async function createOrderController(app: FastifyInstance) {
         cakeId,
         amount: data.amount,
         benefit: data.benefit,
-        clientName: data.clientName,
         revenue: data.revenue,
       })
 

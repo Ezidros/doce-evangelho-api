@@ -1,3 +1,4 @@
+import { Cake } from '@prisma/client'
 import { CakesRepository } from '../../repositories/cakes-repository'
 
 interface AddCakeUseCaseRequest {
@@ -6,7 +7,7 @@ interface AddCakeUseCaseRequest {
 }
 
 interface AddCakeUseCaseResponse {
-  count: number
+  cake: Cake
 }
 
 export class AddCakeUseCase {
@@ -16,18 +17,16 @@ export class AddCakeUseCase {
     cakeId,
     quantity,
   }: AddCakeUseCaseRequest): Promise<AddCakeUseCaseResponse> {
-    const cake = await this.cakeRepository.fetchById(cakeId)
+    const cakeById = await this.cakeRepository.fetchById(cakeId)
 
-    if (!cake) {
+    if (!cakeById) {
       throw new Error()
     }
 
-    if (cake) {
-      cake.quantity = quantity
-    }
+    cakeById.quantity = quantity
 
-    const count = (await this.cakeRepository.addCakeById(cake))! ?? 1
+    const cake = (await this.cakeRepository.addCakeById(cakeById))!
 
-    return { count }
+    return { cake }
   }
 }

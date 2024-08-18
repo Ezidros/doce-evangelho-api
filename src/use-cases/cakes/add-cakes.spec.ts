@@ -19,11 +19,11 @@ describe('add new cakes', () => {
       price: 'R$ 8,00',
     })
 
-    const { count } = await sut.execute({
+    const { cake } = await sut.execute({
       cakeId: createCake.id,
-      quantity: createCake.quantity!,
+      quantity: 10,
     })
 
-    expect(count).toEqual(1)
+    expect(cake.quantity).toEqual(10)
   })
 })

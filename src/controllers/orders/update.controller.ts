@@ -14,7 +14,6 @@ export async function updateOrderController(app: FastifyInstance) {
           orderId: z.string().uuid(),
         }),
         body: z.object({
-          clientName: z.string(),
           benefit: z.string(),
           revenue: z.string(),
         }),
@@ -29,7 +28,6 @@ export async function updateOrderController(app: FastifyInstance) {
       await updateOrder.execute({
         orderId,
         benefit: data.benefit,
-        clientName: data.clientName,
         revenue: data.revenue,
       })
 
