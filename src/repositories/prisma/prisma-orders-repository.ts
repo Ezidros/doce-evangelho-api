@@ -3,8 +3,16 @@ import { OrdersRepository } from '../orders-repository'
 import { prisma } from '../../lib/prisma'
 
 export class PrismaOrderRepository implements OrdersRepository {
-  async fetchAllOrders(): Promise<Order[]> {
-    const orders = await prisma.order.findMany()
+  async fetchAllOrders(page: number = 1, limit: number = 10): Promise<Order[]> {
+    const skip = (page - 1) * limit
+
+    const orders = await prisma.order.findMany({
+      orderBy: {
+        createdAt: 'desc',
+      },
+      skip,
+      take: limit,
+    })
 
     return orders
   }

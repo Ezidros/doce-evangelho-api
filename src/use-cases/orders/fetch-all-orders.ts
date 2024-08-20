@@ -8,8 +8,11 @@ interface FetchAllOrdersUseCaseResponse {
 export class FetchAllOrdersUseCase {
   constructor(public orderRepository: OrdersRepository) {}
 
-  async execute(): Promise<FetchAllOrdersUseCaseResponse> {
-    const orders = await this.orderRepository.fetchAllOrders()
+  async execute(
+    page: number = 1,
+    limit: number = 10,
+  ): Promise<FetchAllOrdersUseCaseResponse> {
+    const orders = await this.orderRepository.fetchAllOrders(page, limit)
 
     return { orders }
   }

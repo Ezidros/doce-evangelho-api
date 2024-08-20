@@ -5,7 +5,7 @@ export interface OrdersRepository {
   update(order: Order): Promise<Order>
   delete(order: Order): Promise<void>
 
-  fetchAllOrders(): Promise<Order[]>
+  fetchAllOrders(page?: number, limit?: number): Promise<Order[]>
   fetchById(orderId: string): Promise<Order | null>
   markCakeAsSold(
     cake: Cake,

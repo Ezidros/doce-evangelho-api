@@ -7,10 +7,11 @@ export class InMemoryOrdersRepository implements OrdersRepository {
 
   constructor(private cakesRepository: InMemoryCakesRepository) {}
 
-  async fetchAllOrders(): Promise<Order[]> {
-    const orders = this.items
+  async fetchAllOrders(page: number = 1, limit: number = 10): Promise<Order[]> {
+    const start = (page - 1) * limit
+    const end = start + limit
 
-    return orders
+    return this.items.slice(start, end)
   }
 
   async fetchById(orderId: string): Promise<Order | null> {
