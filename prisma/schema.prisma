@@ -12,7 +12,7 @@ model Cake {
   flavor          String
   filling         String
   description     String
-  price           String
+  price           Int      @default(0)
   quantity        Int?     @default(1)
   isSpecialFlavor Boolean? @default(false) @map("is_special_flavor")
   isSolded        Boolean? @default(false) @map("is_solded")
@@ -24,14 +24,15 @@ model Cake {
 }
 
 model Order {
-  id        String   @id @default(uuid())
-  amount    String
-  benefit   String
-  revenue   String
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  id          String   @id @default(uuid())
+  amount      Int      @default(0)
+  benefit     Int      @default(0)
+  revenue     Int      @default(0)
+  totalOrders Int      @default(0)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
 
-  cake   Cake   @relation(fields: [cakeId], references: [id], onDelete: Cascade)
+  cake   Cake   @relation(fields: [cakeId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   cakeId String @map("cake_id")
 
   @@map("orders")

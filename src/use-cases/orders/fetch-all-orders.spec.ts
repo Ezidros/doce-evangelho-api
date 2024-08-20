@@ -21,12 +21,12 @@ describe('fetch all orders', () => {
       flavor: 'Chocolate',
       filling: 'Brigadeiro',
       description: 'Um delicioso bolo com recheio de brigadeiro',
-      price: 'R$ 8,00',
+      price: 8,
     })
 
     await ordersRepository.create({
-      benefit: 'R$ 3,00',
-      revenue: 'R$ 5,00',
+      benefit: 3,
+      revenue: 5,
       amount: cake.price,
       cakeId: cake.id,
     })
@@ -41,13 +41,13 @@ describe('fetch all orders', () => {
       flavor: 'Chocolate',
       filling: 'Brigadeiro',
       description: 'Um delicioso bolo com recheio de brigadeiro',
-      price: 'R$ 8,00',
+      price: 8,
     })
 
     for (let i = 0; i < 15; i++) {
       await ordersRepository.create({
-        benefit: 'R$ 3,00',
-        revenue: 'R$ 5,00',
+        benefit: 3,
+        revenue: 5,
         amount: cake.price,
         cakeId: cake.id,
       })

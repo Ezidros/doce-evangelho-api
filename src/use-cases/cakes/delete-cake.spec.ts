@@ -16,7 +16,7 @@ describe('create cakes', () => {
       flavor: 'Chocolate',
       filling: 'Brigadeiro',
       description: 'Um delicioso bolo com recheio de brigadeiro',
-      price: 'R$ 8,00',
+      price: 8,
     })
 
     await sut.execute({

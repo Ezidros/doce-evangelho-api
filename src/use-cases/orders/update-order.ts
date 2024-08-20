@@ -3,8 +3,8 @@ import { OrdersRepository } from '../../repositories/orders-repository'
 
 interface UpdateOrderUseCaseRequest {
   orderId: string
-  benefit: string
-  revenue: string
+  benefit: number
+  revenue: number
 }
 
 interface UpdateOrderUseCaseResponse {

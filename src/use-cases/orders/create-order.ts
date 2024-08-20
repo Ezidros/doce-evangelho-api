@@ -2,9 +2,9 @@ import { Order } from '@prisma/client'
 import { OrdersRepository } from '../../repositories/orders-repository'
 
 interface CreateOrderUseCaseRequest {
-  amount: string
-  benefit: string
-  revenue: string
+  amount: number
+  benefit: number
+  revenue: number
   cakeId: string
 }
 

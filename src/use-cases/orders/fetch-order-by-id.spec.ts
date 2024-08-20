@@ -22,13 +22,13 @@ describe('fetch order by id', () => {
       flavor: 'Chocolate',
       filling: 'Brigadeiro',
       description: 'Um delicioso bolo com recheio de brigadeiro',
-      price: 'R$ 8,00',
+      price: 8,
     })
 
     await ordersRepository.create({
       id: 'order-id-1',
-      benefit: 'R$ 3,00',
-      revenue: 'R$ 5,00',
+      benefit: 3,
+      revenue: 5,
       amount: cake.price,
       cakeId: cake.id,
     })
@@ -37,6 +37,6 @@ describe('fetch order by id', () => {
       orderId: 'order-id-1',
     })
 
-    expect(order?.revenue).toEqual('R$ 5,00')
+    expect(order?.revenue).toEqual(5)
   })
 })

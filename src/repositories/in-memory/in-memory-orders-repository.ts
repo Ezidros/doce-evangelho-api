@@ -50,11 +50,14 @@ export class InMemoryOrdersRepository implements OrdersRepository {
     const revenue = Number(soldCake.price) * 0.4
     const benefit = Number(soldCake.price) * 0.6
 
+    const totalOrders = this.items.length
+
     const order = {
       id: data.id ?? 'order-id',
       amount: soldCake.price,
-      benefit: benefit.toString(),
-      revenue: revenue.toString(),
+      benefit,
+      revenue,
+      totalOrders,
       cakeId: soldCake.id,
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -66,14 +69,17 @@ export class InMemoryOrdersRepository implements OrdersRepository {
   }
 
   async create(data: Prisma.OrderUncheckedCreateInput): Promise<Order> {
+    const totalOrders = this.items.length
+
     const order = {
       id: data.id ?? 'order-id',
-      amount: data.amount,
-      benefit: data.benefit,
-      revenue: data.revenue,
+      amount: data.amount ?? 0,
+      benefit: data.benefit ?? 0,
+      revenue: data.revenue ?? 0,
       cakeId: data.cakeId,
       createdAt: new Date(),
       updatedAt: new Date(),
+      totalOrders,
     }
 
     this.items.push(order)

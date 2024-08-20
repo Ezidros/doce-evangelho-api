@@ -21,7 +21,7 @@ describe('mark cake as sold', () => {
       flavor: 'Chocolate',
       filling: 'Brigadeiro',
       description: 'Um delicioso bolo com recheio de brigadeiro',
-      price: 'R$ 8,00',
+      price: 8,
     })
 
     const { order } = await sut.execute({

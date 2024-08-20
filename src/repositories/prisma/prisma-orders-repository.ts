@@ -31,13 +31,15 @@ export class PrismaOrderRepository implements OrdersRepository {
     cake: Cake,
     data: Prisma.OrderUncheckedCreateInput,
   ): Promise<Order> {
+    const newQuantity = cake.quantity! - 1
+
     const currentCake = await prisma.cake.update({
       where: {
         id: cake.id,
       },
       data: {
         isSolded: cake.isSolded,
-        quantity: cake.quantity! - 1,
+        quantity: newQuantity,
       },
       select: {
         id: true,
@@ -47,8 +49,10 @@ export class PrismaOrderRepository implements OrdersRepository {
       },
     })
 
-    const revenue = Number(currentCake.price) * 0.4
-    const benefit = Number(currentCake.price) * 0.6
+    const totalOrders = await prisma.order.count()
+
+    const revenue = currentCake.price * 0.4
+    const benefit = currentCake.price * 0.6
 
     const order = await prisma.order.create({
       data: {
@@ -56,8 +60,9 @@ export class PrismaOrderRepository implements OrdersRepository {
         amount: currentCake.price,
         createdAt: data.createdAt,
         updatedAt: data.updatedAt,
-        revenue: revenue.toString(),
-        benefit: benefit.toString(),
+        revenue,
+        benefit,
+        totalOrders,
       },
     })
 

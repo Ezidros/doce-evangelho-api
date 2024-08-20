@@ -37,7 +37,7 @@ export class InMemoryCakesRepository implements CakesRepository {
       filling: data.filling,
       description: data.description,
       quantity: data.quantity ?? 1,
-      price: data.price,
+      price: data.price ?? 0,
       isSpecialFlavor: data.isSpecialFlavor ?? false,
       isSolded: data.isSolded ?? false,
       createdAt: new Date(),

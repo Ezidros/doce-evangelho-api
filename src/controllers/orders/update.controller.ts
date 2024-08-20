@@ -14,8 +14,8 @@ export async function updateOrderController(app: FastifyInstance) {
           orderId: z.string().uuid(),
         }),
         body: z.object({
-          benefit: z.string(),
-          revenue: z.string(),
+          benefit: z.coerce.number(),
+          revenue: z.coerce.number(),
         }),
       },
     },

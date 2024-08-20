@@ -21,12 +21,12 @@ describe('create order', () => {
       flavor: 'Chocolate',
       filling: 'Brigadeiro',
       description: 'Um delicioso bolo com recheio de brigadeiro',
-      price: 'R$ 8,00',
+      price: 8,
     })
 
     const { order } = await sut.execute({
-      benefit: 'R$ 3,00',
-      revenue: 'R$ 5,00',
+      benefit: 3,
+      revenue: 5,
       amount: cake.price,
       cakeId: cake.id,
     })

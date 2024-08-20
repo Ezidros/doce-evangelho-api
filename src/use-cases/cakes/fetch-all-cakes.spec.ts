@@ -16,14 +16,14 @@ describe('fetch all cakes', () => {
       flavor: 'Chocolate',
       filling: 'Brigadeiro',
       description: 'Um delicioso bolo com recheio de brigadeiro',
-      price: 'R$ 8,00',
+      price: 8,
     })
 
     await cakesRepository.create({
       flavor: 'Maracuja',
       filling: 'Chocolate',
       description: 'Um delicioso bolo de maracuja com recheio de chocolate',
-      price: 'R$ 10,00',
+      price: 10,
     })
 
     const { cakes } = await sut.execute()

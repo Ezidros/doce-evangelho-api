@@ -5,7 +5,7 @@ interface CreateCakeUseCaseRequest {
   flavor: string
   filling: string
   description: string
-  price: string
+  price: number
   isSpecialFlavor?: boolean
   isSolded?: boolean
 }

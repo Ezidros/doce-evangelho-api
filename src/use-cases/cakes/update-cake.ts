@@ -7,7 +7,7 @@ interface UpdateCakeUseCaseRequest {
   filling: string
   description: string
   quantity: number | null
-  price: string
+  price: number
   isSpecialFlavor?: boolean
   isSolded?: boolean
 }

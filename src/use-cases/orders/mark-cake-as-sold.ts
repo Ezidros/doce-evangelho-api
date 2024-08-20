@@ -29,14 +29,14 @@ export class MarkCakeAsSoldUseCase {
 
     await this.cakesRepository.update(cake)
 
-    const revenue = Number(cake.price) * 0.4
-    const benefit = Number(cake.price) * 0.6
+    const revenue = cake.price * 0.4
+    const benefit = cake.price * 0.6
 
     const order = await this.orderRepository.create({
       amount: cake.price,
-      benefit: benefit.toString(),
-      revenue: revenue.toString(),
       cakeId: cake.id,
+      benefit,
+      revenue,
     })
 
     return { order }

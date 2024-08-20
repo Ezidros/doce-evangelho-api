@@ -14,10 +14,9 @@ export async function createOrderController(app: FastifyInstance) {
           cakeId: z.string().uuid(),
         }),
         body: z.object({
-          clientName: z.string(),
-          amount: z.string(),
-          benefit: z.string(),
-          revenue: z.string(),
+          amount: z.coerce.number(),
+          benefit: z.coerce.number(),
+          revenue: z.coerce.number(),
         }),
       },
     },

@@ -14,7 +14,7 @@ export async function createCakeController(app: FastifyInstance) {
           flavor: z.string(),
           filling: z.string(),
           description: z.string(),
-          price: z.string(),
+          price: z.coerce.number(),
           isSpecialFlavor: z.boolean().default(false),
           isSolded: z.boolean().default(false),
         }),
