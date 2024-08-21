@@ -20,6 +20,11 @@ import { getAllOrdersController } from './controllers/orders/get-all.controller'
 import { getOrderByIdController } from './controllers/orders/get-by-id.controller'
 import { addCakesController } from './controllers/cakes/add-cakes.controller'
 import { markCakeAsSoldController } from './controllers/orders/mark-cake-as-sold.controller'
+import { createTransactionController } from './controllers/transactions/create-transaction.controller'
+import { updateTransactionController } from './controllers/transactions/update-transaction.controller'
+import { deleteTransactionController } from './controllers/transactions/delete-transaction.controller'
+import { fetchAllTransactionsController } from './controllers/transactions/fetch-all-transactions.controller'
+import { getTransactionByIdController } from './controllers/transactions/fetch-one-transaction-by-id.controller'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -33,8 +38,8 @@ app.setValidatorCompiler(validatorCompiler)
 app.register(fastifySwagger, {
   openapi: {
     info: {
-      title: 'Daily diet',
-      description: 'API for diet control',
+      title: 'Doce evangelho',
+      description: 'API de controle para sistema de bolos',
       version: '1.0.0',
     },
   },
@@ -60,6 +65,13 @@ app.register(deleteOrderController)
 app.register(getAllOrdersController)
 app.register(getOrderByIdController)
 app.register(markCakeAsSoldController)
+
+// Transactions
+app.register(createTransactionController)
+app.register(updateTransactionController)
+app.register(deleteTransactionController)
+app.register(fetchAllTransactionsController)
+app.register(getTransactionByIdController)
 
 app
   .listen({
